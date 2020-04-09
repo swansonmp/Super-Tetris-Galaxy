@@ -1,8 +1,14 @@
 import * as THREE from './lib/three.module.js';
 import { OrbitControls } from './lib/OrbitControls.js';
 
+
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+
 export default class Graphics {
-	
+
+
   constructor(game, renderer) {
     this.game = game;
     this.renderer = renderer;
@@ -14,6 +20,7 @@ export default class Graphics {
   
   initScene() {
     this.scene = new THREE.Scene();
+	this.scene.add(cube);
   }
   
   initCamera() {
@@ -36,13 +43,6 @@ export default class Graphics {
   
   render() {
     this.renderer.render(this.scene, this.camera);
-
-	let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-	let material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-	let cube = new THREE.Mesh( geometry, material );
-	
-	this.scene.add(cube);
-	
 	
   }
   
