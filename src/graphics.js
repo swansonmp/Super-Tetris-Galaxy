@@ -3,7 +3,7 @@ import * as THREE from './lib/three.module.js';
 export default class Graphics {
   constructor(game, renderer) {
     this.game = game;
-    this.rederer = renderer;
+    this.renderer = renderer;
     
     this.initScene();
     this.initCamera();
@@ -11,6 +11,8 @@ export default class Graphics {
   
   initScene() {
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x87ceeb);
+    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1)); // Add light
   }
   
   initCamera() {

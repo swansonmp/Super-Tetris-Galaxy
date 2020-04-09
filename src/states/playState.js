@@ -15,7 +15,7 @@ export default class MenuState extends State {
   }
   
   render() {
-    //this.game.graphics.render();
+    this.game.graphics.render();
   }
   
   start() { this.showElements(); }

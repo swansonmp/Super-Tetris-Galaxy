@@ -17,7 +17,7 @@ export default class PauseState extends State {
 	}
 	
 	render() {
-	
+    this.game.graphics.render();
 	}
 	
 	start() {
