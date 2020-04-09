@@ -3,6 +3,7 @@ import Graphics from "./graphics.js";
 import UIHelper from "./uiHelper.js";
 
 import MenuState from "./states/menuState.js";
+import PlayState from "./states/playState.js";
 
 export default class Game {
   constructor(renderer) {
@@ -11,6 +12,7 @@ export default class Game {
     this.graphics = new Graphics(this, renderer);
     
     this.menuState = new MenuState(this);
+    this.playState = new PlayState(this);
     
     this.state = this.getMenuState();
     this.state.start();
@@ -30,6 +32,7 @@ export default class Game {
   }
   
   getMenuState() { return this.menuState; }
+  getPlayState() { return this.playState; }
   
   onWindowResize() { this.graphics.onWindowResize(); }
   
