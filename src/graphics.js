@@ -1,6 +1,7 @@
 import * as THREE from './lib/three.module.js';
 
 export default class Graphics {
+	
   constructor(game, renderer) {
     this.game = game;
     this.renderer = renderer;
@@ -11,21 +12,16 @@ export default class Graphics {
   
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x87ceeb);
-    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1)); // Add light
   }
   
   initCamera() {
     let ratio = 10;
-    this.camera = new THREE.OrthographicCamera(
-      window.innerWidth/-ratio, 
-      window.innerWidth/ratio, 
-      window.innerHeight/ratio, 
-      window.innerHeight/-ratio, 
-      0, 
-      5000
-    );
-    this.camera.position.set(0, 100, 0);
+    this.camera = new THREE.PerspectiveCamera(
+      75, //field of view
+      window.innerWidth / window.innerHeight, //aspect ratio
+	  0.1, //clipping distances
+	  1000);
+    this.camera.position.z = 5;
   }
   
   update(deltaTime) {
@@ -34,6 +30,14 @@ export default class Graphics {
   
   render() {
     this.renderer.render(this.scene, this.camera);
+
+	let geometry = new THREE.BoxGeometry( 1, 1, 1 );
+	let material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+	let cube = new THREE.Mesh( geometry, material );
+	
+	this.scene.add(cube);
+	
+	
   }
   
   onWindowResize() {
