@@ -4,11 +4,12 @@ import State from "./state.js";
 export default class PauseState extends State {
 	
 	constructor(game) {
-		super(game, 
-		[
-			{ id : "background3" }
-		]
-		);
+		super(game,
+      [
+        { id: "pauseFilter" },
+        { id: "pauseText", text: "Paused"}
+      ]
+    );
 	}
 	
 	update(deltaTime) {
@@ -28,8 +29,7 @@ export default class PauseState extends State {
 	}
 	
 	handleEscape() {
-		this.game.setState(this.game.getPauseState());
-		console.log('working');
+		this.game.setState(this.game.getPlayState());
 	}
 	
 }

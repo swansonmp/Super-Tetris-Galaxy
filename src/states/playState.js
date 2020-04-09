@@ -4,7 +4,7 @@ export default class MenuState extends State {
   constructor(game) {
     super(game,
       [
-        { id: "background2" }
+        
       ]
     );
 
@@ -21,6 +21,6 @@ export default class MenuState extends State {
   start() { this.showElements(); }
   stop() { this.hideElements(); }
   
-  handleEnter() { this.game.setState(this.game.getPauseState()); }
+  handleEscape() { this.game.setState(this.game.getPauseState()); }
   
 }

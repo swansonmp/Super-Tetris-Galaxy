@@ -46,3 +46,24 @@ img {
   z-index: 0;
   display: none;
 }
+#pauseFilter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  backdrop-filter: blur(10px);
+  display: none;
+}
+#pauseText {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  z-index: 1;
+  display: none;
+  
+  text-align: center;
+  font: bold 72px monospace;
+  color: white;
+}
