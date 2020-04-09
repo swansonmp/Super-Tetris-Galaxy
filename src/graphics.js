@@ -1,4 +1,5 @@
 import * as THREE from './lib/three.module.js';
+import { OrbitControls } from './lib/OrbitControls.js';
 
 export default class Graphics {
 	
@@ -8,6 +9,7 @@ export default class Graphics {
     
     this.initScene();
     this.initCamera();
+    this.initControls();
   }
   
   initScene() {
@@ -22,6 +24,10 @@ export default class Graphics {
 	  0.1, //clipping distances
 	  1000);
     this.camera.position.z = 5;
+  }
+  
+  initControls() {
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
   }
   
   update(deltaTime) {
