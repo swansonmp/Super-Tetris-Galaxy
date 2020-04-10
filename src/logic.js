@@ -21,20 +21,21 @@ export default class Logic {
     
     this.elapsedTime = 1;
     this.delay = 1;
+    //we know we need an active block and stuff
   }
   
   initGrid() {
-    this.grid = [];
+    this.grid = this.init2dArray(this.gridSize);
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
-        //this.grid[i * this.gridSize + j] = (i * this.gridSize + j) % 9; // For pretty rainbow
-        this.grid[i * this.gridSize + j] = this.type.NoBlock;
+        //this.grid[i][j] = (i * this.gridSize + j) % 9; // For pretty rainbow
+        this.grid[i][j] = this.type.NoBlock;
       }
     }
     
     // Set Center Block
     let half = Math.trunc(this.gridSize / 2);
-    this.grid[half * this.gridSize + half] = this.type.CenterBlock;
+    this.grid[half][half] = this.type.CenterBlock;
   }
   
   update(deltaTime) {
@@ -43,6 +44,14 @@ export default class Logic {
       this.game.graphics.updateBlocks();
       this.elapsedTime -= this.delay;
     }
+  }
+  
+  init2dArray(size) {
+    let a = [];
+    for (let i = 0; i < size; i++) {
+        a.push([]);
+    }
+    return a;
   }
   
   getGrid() {

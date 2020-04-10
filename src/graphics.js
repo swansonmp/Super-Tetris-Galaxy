@@ -34,15 +34,15 @@ export default class Graphics {
     ];
     //this.material.wireframe = true;
     
-    this.grid = [];
     let gridSize = this.game.logic.getGridSize();
+    this.grid = this.game.logic.init2dArray(gridSize);
     
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
         let cube = new THREE.Mesh(this.geometry, this.materials[0]);
         cube.position.x = i;
         cube.position.y = -j;
-        this.grid[i * gridSize + j] = cube;
+        this.grid[i][j] = cube;
         this.scene.add(cube);
       }
     }
@@ -78,8 +78,8 @@ export default class Graphics {
     
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
-        let type = logicGrid[i * gridSize + j];
-        this.grid[i * gridSize + j].material = this.materials[type];
+        let type = logicGrid[i][j];
+        this.grid[i][j].material = this.materials[type];
       }
     }
   }
