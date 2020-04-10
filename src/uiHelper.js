@@ -9,7 +9,8 @@ export default class UIHelper {
     else {
       element = document.createElement(spec.tag);
     }
-    
+
+	
     if (spec.id != undefined) {
       element.id = spec.id;
     }
@@ -20,6 +21,7 @@ export default class UIHelper {
       element.textContent = spec.text;
     }
     
+	
     document.getElementById("container").appendChild(element);
     return element;
   }

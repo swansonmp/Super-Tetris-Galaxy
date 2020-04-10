@@ -78,3 +78,12 @@ img {
   font: bold 72px monospace;
   color: white;
 }
+#menuButton {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  width: 10%;
+  z-index: 1;
+  display: none;
+  text-align: center;
+}
