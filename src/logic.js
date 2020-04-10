@@ -4,19 +4,31 @@ export default class Logic {
   constructor(game) {
     this.game = game;
     
+    this.type = {
+        NoBlock     : 0,
+        CenterBlock : 1,
+        OBlock      : 2,
+        IBlock      : 3,
+        JBlock      : 4,
+        LBlock      : 5,
+        SBlock      : 6,
+        ZBlock      : 7,
+        TBlock      : 8
+	  }
+    
     this.gridSize = 49;
 	  this.initGrid();
   }
   
   initGrid() {
     // temporary grid creation
-    // init all to center block
     this.grid = [];
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
-        this.grid[i * this.gridSize + j] = 1;
+        this.grid[i * this.gridSize + j] = (i * this.gridSize + j) % 9;
       }
     }
+    this.grid[this.gridSize] = this.type.CenterBlock;
   }
   
   getGrid() {

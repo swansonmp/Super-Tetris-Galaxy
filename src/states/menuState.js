@@ -6,7 +6,7 @@ export default class MenuState extends State {
     super(game,
       [
         { id: "background" },
-		{ id: "menuButton", tag: "Button", text: "PLAY" }
+		{ id: "menuButton", tag: "Button", text: "CLICK ME" }
       ]
     );
 
