@@ -16,25 +16,33 @@ export default class Graphics {
   
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.add(new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 ));
+    this.scene.add(new THREE.HemisphereLight( 0xffffff, 0x808080, 1 ));
   }
   
   initBlocks() {
-    this.geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-    this.material = new THREE.MeshStandardMaterial( {color: 0xff0000} );
-
-    this.material.wireframe = true;
-    //let axesHelper = new THREE.AxesHelper( 5 );
-	  //this.scene.add(axesHelper);
+    this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+    this.materials = [
+      new THREE.MeshBasicMaterial( {transparent: true, opacity: 0} ),
+      new THREE.MeshStandardMaterial( {color: 0xffffff} ),
+      new THREE.MeshStandardMaterial( {color: 0xffff00} ),
+      new THREE.MeshStandardMaterial( {color: 0x00ffff} ),
+      new THREE.MeshStandardMaterial( {color: 0x0000ff} ),
+      new THREE.MeshStandardMaterial( {color: 0xff8000} ),
+      new THREE.MeshStandardMaterial( {color: 0x00ff00} ),
+      new THREE.MeshStandardMaterial( {color: 0xff0000} ),
+      new THREE.MeshStandardMaterial( {color: 0x8000ff} )
+    ];
+    //this.material.wireframe = true;
     
     this.grid = [];
     let gridSize = this.game.logic.getGridSize();
     
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
-        let cube = new THREE.Mesh(this.geometry, this.material);
+        let cube = new THREE.Mesh(this.geometry, this.materials[0]);
         cube.position.x = i;
         cube.position.y = j;
+        this.grid[i * gridSize + j] = cube;
         this.scene.add(cube);
       }
     }
@@ -46,8 +54,9 @@ export default class Graphics {
     this.camera = new THREE.PerspectiveCamera(
       75, //field of view
       window.innerWidth / window.innerHeight, //aspect ratio
-	  0.1, //clipping distances
-	  1000);
+      0.1, //clipping distances
+      50
+    );
     
     this.camera.position.x = gridSize / 2;
     this.camera.position.y = gridSize / 2;
@@ -61,16 +70,16 @@ export default class Graphics {
     let gridSize = this.game.logic.getGridSize();
     this.controls.target = new THREE.Vector3(gridSize / 2, gridSize / 2, 0);
     
-    this.render();
   }
   
   update(deltaTime) {
-    let grid = this.game.logic.getGrid();
+    let logicGrid = this.game.logic.getGrid();
     let gridSize = this.game.logic.getGridSize();
     
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
-        let type = grid[i * gridSize + j];
+        let type = logicGrid[i * gridSize + j];
+        this.grid[i * gridSize + j].material = this.materials[type];
       }
     }
   }
