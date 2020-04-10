@@ -21,14 +21,17 @@ export default class Logic {
   }
   
   initGrid() {
-    // temporary grid creation
     this.grid = [];
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
-        this.grid[i * this.gridSize + j] = (i * this.gridSize + j) % 9;
+        //this.grid[i * this.gridSize + j] = (i * this.gridSize + j) % 9; // For pretty rainbow
+        this.grid[i * this.gridSize + j] = this.type.NoBlock;
       }
     }
-    this.grid[this.gridSize] = this.type.CenterBlock;
+    
+    // Set Center Block
+    let half = Math.trunc(this.gridSize / 2);
+    this.grid[half * this.gridSize + half] = this.type.CenterBlock;
   }
   
   getGrid() {

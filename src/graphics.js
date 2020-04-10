@@ -41,7 +41,7 @@ export default class Graphics {
       for (let j = 0; j < gridSize; j++) {
         let cube = new THREE.Mesh(this.geometry, this.materials[0]);
         cube.position.x = i;
-        cube.position.y = j;
+        cube.position.y = -j;
         this.grid[i * gridSize + j] = cube;
         this.scene.add(cube);
       }
@@ -55,11 +55,11 @@ export default class Graphics {
       75, //field of view
       window.innerWidth / window.innerHeight, //aspect ratio
       0.1, //clipping distances
-      50
+      100
     );
     
     this.camera.position.x = gridSize / 2;
-    this.camera.position.y = gridSize / 2;
+    this.camera.position.y = -gridSize / 2;
     this.camera.position.z = 35;
     //this.camera.lookAt(gridSize / 2, gridSize / 2, gridSize);
   }
@@ -68,7 +68,7 @@ export default class Graphics {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     
     let gridSize = this.game.logic.getGridSize();
-    this.controls.target = new THREE.Vector3(gridSize / 2, gridSize / 2, 0);
+    this.controls.target = new THREE.Vector3(gridSize / 2, -gridSize / 2, 0);
     
   }
   
