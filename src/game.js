@@ -25,6 +25,7 @@ export default class Game {
   update(deltaTime) { 
     this.state.update(deltaTime); 
   }
+  
   render() { 
     this.state.render();
   }

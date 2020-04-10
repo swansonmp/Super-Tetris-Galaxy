@@ -1,9 +1,11 @@
+import OBlock from "./blocks/oblock.js";
+import ZBlock from "./blocks/zblock.js";
+
 export default class Logic {
 	
 
   constructor(game) {
     this.game = game;
-    
     this.type = {
         NoBlock     : 0,
         CenterBlock : 1,
@@ -15,13 +17,40 @@ export default class Logic {
         ZBlock      : 7,
         TBlock      : 8
 	  }
-    
+	
     this.gridSize = 49;
 	  this.initGrid();
     
     this.elapsedTime = 1;
     this.delay = 1;
     //we know we need an active block and stuff
+	this.currentBlock = new ZBlock(this.type.ZBlock, this.gridSize); //just a placeholder for now.
+	this.updateCurrentBlock(); //kind of like the main loop, will handle the spawn coordinates and what not.
+  }
+  
+  //get the state matrix of the current block, then selectively decide
+  updateCurrentBlock() {
+	  let block = this.currentBlock.currentState; //states[]
+	  
+	  //X and Y variables are the offset of the top-left corner of the matrix to the origin (0,0)
+	  let curX = this.currentBlock.x; 
+	  let curY = this.currentBlock.y;
+	  
+	  for (let row = 0; row < block.length; row++) {
+		  for (let col = 0; col < block.length; col++) {
+			  if (block[row][col] != 0) {
+				  this.stateMatrixToGrid(row, col);
+			  }
+		  }
+	  }
+  }
+  
+  stateMatrixToGrid(row, col) {
+	  let x = this.currentBlock.x;
+	  let y = this.currentBlock.y;
+	  
+	  console.log('x ' + (x + col) + ', y ' + (y + row)); 
+	  this.grid[x + col][y + row] = this.currentBlock.type;
   }
   
   initGrid() {
