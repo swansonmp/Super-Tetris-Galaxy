@@ -1,11 +1,13 @@
 import * as THREE from './lib/three.module.js';
 import { OrbitControls } from './lib/OrbitControls.js';
 
-
+//this is all just placeholder stuff.
 var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 var material = new THREE.MeshBasicMaterial( );
 material.wireframe = true;
 var cube = new THREE.Mesh( geometry, material );
+
+var axesHelper = new THREE.AxesHelper( 5 );
 
 
 export default class Graphics {
@@ -23,6 +25,7 @@ export default class Graphics {
   initScene() {
     this.scene = new THREE.Scene();
 	this.scene.add(cube);
+	this.scene.add(axesHelper);
   }
   
   initCamera() {
