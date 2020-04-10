@@ -18,6 +18,9 @@ export default class Logic {
     
     this.gridSize = 49;
 	  this.initGrid();
+    
+    this.elapsedTime = 1;
+    this.delay = 1;
   }
   
   initGrid() {
@@ -32,6 +35,14 @@ export default class Logic {
     // Set Center Block
     let half = Math.trunc(this.gridSize / 2);
     this.grid[half * this.gridSize + half] = this.type.CenterBlock;
+  }
+  
+  update(deltaTime) {
+    this.elapsedTime += deltaTime;
+    if (this.elapsedTime >= this.delay) {
+      this.game.graphics.updateBlocks();
+      this.elapsedTime -= this.delay;
+    }
   }
   
   getGrid() {

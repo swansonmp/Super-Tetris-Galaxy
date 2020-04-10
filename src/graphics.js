@@ -72,7 +72,7 @@ export default class Graphics {
     
   }
   
-  update(deltaTime) {
+  updateBlocks() {
     let logicGrid = this.game.logic.getGrid();
     let gridSize = this.game.logic.getGridSize();
     

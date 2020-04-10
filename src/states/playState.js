@@ -11,7 +11,7 @@ export default class PlayState extends State {
   }
   
   update(deltaTime) {
-    this.game.graphics.update(deltaTime);
+    this.game.logic.update(deltaTime);
   }
   
   render() {
