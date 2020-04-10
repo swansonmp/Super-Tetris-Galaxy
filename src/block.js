@@ -3,4 +3,12 @@ export default class Block {
 		
 	}
 	
+	
+	
+	
+	
+	//subclasses will default to here.
+	spinRight() {}
+	spinLeft() {}
+	
 }
