@@ -5,11 +5,17 @@ export default class PauseState extends State {
 	
 	constructor(game) {
 		super(game,
-      [
+       [
         { id: "pauseFilter" },
-        { id: "pauseText", text: "Paused"}
-      ]
-    );
+        { id: "pauseText", text: "Paused"},
+		{ id: "optionButton", tag: "Button", text: "OPTIONS" }
+       ]
+	  );
+	  
+	  
+	  
+	
+	
 	}
 	
 	update(deltaTime) {

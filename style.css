@@ -82,9 +82,21 @@ img {
 }
 #menuButton {
   position: absolute;
-  top: 65%;
-  left: 50%;
-  width: 10%;
+  top: 55%;
+  left: 35%;
+  width: 25%;
+  height: 25%
+  z-index: 1;
+  display: none;
+  text-align: center;
+}
+
+#optionButton {
+  position: absolute;
+  top: 30%;
+  left: 37.5%;
+  width: 25%;
+  height: 10%
   z-index: 1;
   display: none;
   text-align: center;
