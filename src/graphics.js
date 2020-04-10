@@ -48,7 +48,9 @@ export default class Graphics {
   
   render() {
     this.renderer.render(this.scene, this.camera);
-	
+	cube.rotation.x += 0.01;
+	cube.rotation.y += 0.01;
+	console.log(cube.rotationX);
   }
   
   onWindowResize() {
