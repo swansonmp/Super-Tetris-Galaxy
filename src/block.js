@@ -1,17 +1,16 @@
-//enum for type of block. this might be better off in logic.
-const type = {
-		OBlock : 0,
-		IBlock : 1,
-		JBlock : 2,
-		LBlock : 3,
-		SBlock : 4,
-		ZBlock : 5,
-		TBlock : 6
-	}
-
 export default class Block {
 	constructor(type) {
-		this.type = type.OBlock;
+		this.type = {
+        NoBlock     : 0,
+        CenterBlock : 1,
+        OBlock      : 1,
+        IBlock      : 2,
+        JBlock      : 3,
+        LBlock      : 4,
+        SBlock      : 5,
+        ZBlock      : 6,
+        TBlock      : 7
+	  }
 	}
 	
 	

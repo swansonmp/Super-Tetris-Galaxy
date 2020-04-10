@@ -1,6 +1,6 @@
 import State from "./state.js";
 
-export default class MenuState extends State {
+export default class PlayState extends State {
   constructor(game) {
     super(game,
       [

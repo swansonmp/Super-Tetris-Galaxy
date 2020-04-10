@@ -24,8 +24,8 @@ export default class Graphics {
   
   initScene() {
     this.scene = new THREE.Scene();
-	this.scene.add(cube);
-	this.scene.add(axesHelper);
+	  this.scene.add(cube);
+	  this.scene.add(axesHelper);
   }
   
   initCamera() {
@@ -43,7 +43,13 @@ export default class Graphics {
   }
   
   update(deltaTime) {
-    this.game.logic.getGrid();
+    let grid = this.game.logic.getGrid();
+    let gridSize = this.game.logic.getGridSize();
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        let type = grid[i * gridSize + j];
+      }
+    }
   }
   
   render() {
