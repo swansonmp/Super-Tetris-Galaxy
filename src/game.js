@@ -11,8 +11,8 @@ export default class Game {
   constructor(renderer) {
     this.input = new Input(this);
     this.uiHelper = new UIHelper();
-    this.graphics = new Graphics(this, renderer);
     this.logic = new Logic(this);
+    this.graphics = new Graphics(this, renderer);
     
     this.menuState = new MenuState(this);
     this.playState = new PlayState(this); 
