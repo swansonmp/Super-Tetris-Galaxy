@@ -26,18 +26,4 @@ class bag
 		}
 	}
 }
-/*var bg = new bag();
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());
-console.log(bg.pull());*/
 
