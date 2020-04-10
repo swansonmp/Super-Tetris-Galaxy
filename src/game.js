@@ -1,6 +1,7 @@
 import Input from "./input.js";
 import Graphics from "./graphics.js";
 import UIHelper from "./uiHelper.js";
+import Logic from "./logic.js";
 
 import MenuState from "./states/menuState.js";
 import PlayState from "./states/playState.js";
@@ -11,6 +12,7 @@ export default class Game {
     this.input = new Input(this);
     this.uiHelper = new UIHelper();
     this.graphics = new Graphics(this, renderer);
+    this.logic = new Logic(this);
     
     this.menuState = new MenuState(this);
     this.playState = new PlayState(this); 

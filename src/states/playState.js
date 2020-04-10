@@ -11,7 +11,7 @@ export default class MenuState extends State {
   }
   
   update(deltaTime) {
-    
+    this.game.graphics.update(deltaTime);
   }
   
   render() {
