@@ -21,7 +21,7 @@ img {
   left: 0px;
   height: 100%;
   width: 100%;
-  background-color: #ff0000;
+  background-color: #000000;
   z-index: 0;
   display: none;
 }
@@ -63,6 +63,16 @@ img {
   z-index: 1;
   display: none;
   
+  text-align: center;
+  font: bold 72px monospace;
+  color: white;
+}
+#menuText {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  z-index: 1;
+  display: none;
   text-align: center;
   font: bold 72px monospace;
   color: white;
