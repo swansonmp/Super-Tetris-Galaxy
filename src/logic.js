@@ -1,8 +1,11 @@
 export default class Logic {
+	
+
   constructor(game) {
     this.game = game;
+	
     
-    this.initGrid();
+	this.initGrid();
   }
   
   initGrid() {
