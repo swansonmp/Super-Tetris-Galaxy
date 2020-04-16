@@ -63,7 +63,7 @@ class BlockFactory {
 				//maybe even randomly some day...
 			default:
 		}
-		
+		this.positioning[0] = [5,5];
 		return new Block(type, this.positioning, gravity);
 	}
 
