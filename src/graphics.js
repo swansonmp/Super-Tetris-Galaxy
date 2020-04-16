@@ -90,7 +90,7 @@ export default class Graphics {
     let activeBlock = this.game.logic.getActiveBlock();
     let set = activeBlock.getSet();
     for (let i = 0; i < set.length; i++) {
-      this.grid[set[i][0]][set[i][1]] = this.activeBlock.getType();
+      this.grid[set[i][0]][set[i][1]].material = this.materials[activeBlock.getType()];
     }
   }
   
