@@ -17,7 +17,7 @@ export default function bagFactory(type) {
 
 class Bag {
 	constructor() {
-		this.blockFactory = new BlockFactory(0, 0);
+		this.blockFactory = new BlockFactory(0, 0, 0);
 	}
 	//I'm just a shell of a bag
 	pull() {
@@ -30,7 +30,7 @@ class BlockFactory {
 	 * gravStrat - How this particular block factory will assign gravity
 	 * spawnStrat - How this particular block factory will assign spawns
 	 */
-	constructor(gravStrat, spawnStrat) {
+	constructor(materialType, gravStrat, spawnStrat) {
 		//The parameters for this are probably going to be reworked
 		this.gravStrat = gravStrat;
 		this.spawnStrat = spawnStrat;
@@ -43,6 +43,7 @@ class BlockFactory {
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
+				this.positioning[0] = [0.5, 0.5];
 				this.positioning[1] = [[0,0],[0,1],[1,0],[1,1]];
 				break;
 			case blockType.IBlock:
@@ -68,20 +69,20 @@ class BlockFactory {
 
 	/*
 	 * Takes a double array and generates the cell offsets
+	 * cell offset + base block coordinates = its actual position on the grid
 	 */
 	generateOffsets(arr) {
 		let cells = [];
-		//If a block is of even length, its axis is between blocks
-		if (Math.max(arr.length, arr[0].length) / 2 % 0)
-			this.positioning[0] = [this.positioning[0][0] + 0.5][this.positioning[0][1] + 0.5];
 
-		let offset = Math.max(arr.length, arr[0].length) / 2;
-		console.log(offset);
+		//If a block is of odd length, its axis is between blocks
+		let offset = (Math.max(arr.length, arr[0].length) / 2) % 1;
+		this.positioning[0] = [offset, offset];
+
 		for (let row = 0; row < arr.length; row++) {
 		  	for (let col = 0; col < arr[row].length; col++) {
 			  	if (arr[row][col] != 0) {
 				  	cells.push(
-				  		[col, row]
+				  		[col - arr[row].length / 2 + offset, row - arr.length / 2 + offset]
 				  	)
 			  	}
 		  	}
@@ -102,9 +103,9 @@ class BlockFactory {
 
 //A set of cells, the complete block
 class Block {
-	constructor(type, positioning, gravity) {
+	constructor(materialType, positioning, gravity) {
 		//this constructor probably needs more
-		this.type = type; //Only really used for appearance this deep, an RGB value might be better
+		this.type = materialType; //Only really used for appearance this deep, an RGB value might be better
 		this.x = positioning[0][0];
 		this.y = positioning[0][1];
 
@@ -239,9 +240,7 @@ class Cell {
 	 */
 	checkTransf(dir, baseX, baseY) {
 		let tc = transfCoords(dir);
-
-		return true;
-		//temp, need to consult the grid
+		return (window.grid[tc[0]][tc[1]] != 0);
 	}
 
 	//Moves the cell in a direction
