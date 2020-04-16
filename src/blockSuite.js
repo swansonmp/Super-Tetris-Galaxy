@@ -44,7 +44,7 @@ class BlockFactory {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
 				this.positioning[0] = [0.5, 0.5];
-				this.positioning[1] = [[0,0],[0,1],[1,0],[1,1]];
+				this.positioning[1] = [[-0.5,-0.5],[0.5,0.5],[-0.5,0.5],[0.5,-0.5]];
 				break;
 			case blockType.IBlock:
 				//Or lazily with a drawn array

@@ -22,30 +22,6 @@ img {
   height: 100%;
   width: 100%;
   background-color: #000000;
-  background-image:url("./img/federation.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0;
-  display: none;
-}
-#background2 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  background-color: #00ff00;
-  z-index: 0;
-  display: none;
-}
-
-#background3 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  background-color: #8A2BE2;
   z-index: 0;
   display: none;
 }
@@ -72,7 +48,7 @@ img {
 }
 #menuText {
   position: absolute;
-  top: 10%;
+  top: 20%;
   width: 100%;
   z-index: 1;
   display: none;
@@ -82,15 +58,33 @@ img {
 }
 #menuButton {
   position: absolute;
-  top: 55%;
+  top: 60%;
   left: 35%;
   width: 25%;
-  height: 25%
   z-index: 1;
   display: none;
+  
   text-align: center;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color: white;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  padding: 12px 12px;
+  text-decoration: none;
+  font: bold 24px monospace;
+  
+  animation-name: menuButtonAnimation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
-
+@keyframes menuButtonAnimation {
+  0%   { color: white; }
+  50%  { color: #111111; }
+  100% { color: white; }
+}
 #optionButton {
   position: absolute;
   top: 30%;
@@ -99,5 +93,37 @@ img {
   height: 10%
   z-index: 1;
   display: none;
+  
   text-align: center;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color: white;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  padding: 12px 12px;
+  text-decoration: none;
+  font: bold 24px monospace;
+}
+#exitButton {
+  position: absolute;
+  top: 40%;
+  left: 37.5%;
+  width: 25%;
+  height: 10%
+  z-index: 1;
+  display: none;
+  
+  text-align: center;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color: white;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  padding: 12px 12px;
+  text-decoration: none;
+  font: bold 24px monospace;
 }
