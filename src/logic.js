@@ -1,8 +1,9 @@
-import OBlock from "./blocks/oblock.js";
-import ZBlock from "./blocks/zblock.js";
+//import OBlock from "./blocks/oblock.js";
+//import ZBlock from "./blocks/zblock.js";
+
+import bagFactory from "./blockSuite.js";
 
 export default class Logic {
-	
 
   constructor(game) {
     this.game = game;
@@ -17,26 +18,27 @@ export default class Logic {
         ZBlock      : 7,
         TBlock      : 8
 	  }
-	  
-	  //not sure where direction enum should go.
-	  this.direction = {
+    
+    this.gridSize = 49;
+	  this.initGrid();
+    this.initGame();
+    
+    this.elapsedTime = 1;
+    this.delay = 1;
+    
+    /*
+    this.direction = {
 		  Up : 0,
 		  Down: 1,
 		  Left: 2,
 		  Right: 3
 	  }
-	
-    this.gridSize = 49;
-	  this.initGrid();
-    
-    this.elapsedTime = 1;
-    this.delay = 1;
-	
-    //we know we need an active block and stuff      
-	this.currentBlock = new ZBlock(this.type.ZBlock, this.direction.Up, this.gridSize); //constructor is just a placeholder for now.
-	this.updateCurrentBlock(); 
+    */
+    //this.currentBlock = new ZBlock(this.type.ZBlock, this.direction.Up, this.gridSize); //constructor is just a placeholder for now.
+    //this.updateCurrentBlock(); 
   }
   
+  /*
   //get the state matrix of the current block, then selectively decide which cells need to be filled in.
   updateCurrentBlock() {
 	  let block = this.currentBlock.currentState; //states[] of the block
@@ -56,26 +58,38 @@ export default class Logic {
 	  let y = this.currentBlock.y;
 	  this.grid[x + col][y + row] = this.currentBlock.type;
   }
+  */
   
   initGrid() {
-    this.grid = this.init2dArray(this.gridSize);
+    window.grid = this.init2dArray(this.gridSize);
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
-        //this.grid[i][j] = (i * this.gridSize + j) % 9; // For pretty rainbow
-        this.grid[i][j] = this.type.NoBlock;
+        window.grid[i][j] = this.type.NoBlock;
       }
     }
     
     // Set Center Block
     let half = Math.trunc(this.gridSize / 2);
-    this.grid[half][half] = this.type.CenterBlock;
+    window.grid[half][half] = this.type.CenterBlock;
+  }
+  
+  initGame() {
+    this.bag = bagFactory(0);
+    //this.activeBlock = this.bag.pull();
   }
   
   update(deltaTime) {
     this.elapsedTime += deltaTime;
     if (this.elapsedTime >= this.delay) {
+      //this.updateLogic();
       this.game.graphics.updateBlocks();
       this.elapsedTime -= this.delay;
+    }
+  }
+  
+  updateLogic() {
+    if (this.activeBlock.advance()) {
+      this.bag.pull();
     }
   }
   
@@ -88,11 +102,11 @@ export default class Logic {
   }
   
   getGrid() {
-    return this.grid;
+    return window.grid;
   }
   
   getGridSize() {
-    return this.gridSize;
+    return window.grid[0].length;
   }
   
 }
