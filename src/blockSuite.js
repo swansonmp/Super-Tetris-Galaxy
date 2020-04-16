@@ -21,7 +21,7 @@ class Bag {
 	}
 	//I'm just a shell of a bag
 	pull() {
-		return this.blockFactory.createBlock(blockType.IBlock);
+		return this.blockFactory.createBlock(blockType.JBlock);
 	}
 }
 
@@ -61,11 +61,22 @@ class BlockFactory {
 				break;
 			case blockType.Pentimino:
 				//maybe even randomly some day...
+				break;
+			case blockType.EBlock:
+				this.generateOffsets([
+					[1,1,1],
+					[1,0,0],
+					[1,1,1],
+					[1,0,0],
+					[1,1,1]
+				]);
+				break;
 			default:
 		}
 		this.positioning[0][0] += 23;
-		this.positioning[0][1] += 5;
-		return new Block(type, this.positioning, gravity);
+		this.positioning[0][1] += 8;
+		console.log("giving block " + this.positioning[0]);
+		return new Block(4, this.positioning, gravity);
 	}
 
 	/*
@@ -77,14 +88,21 @@ class BlockFactory {
 
 		//If a block is of odd length, its axis is between blocks
 		let offset = 0;
-		if ((Math.max(arr.length, arr[0].length)) % 2 == 0)
+		let size = Math.max(arr.length, arr[0].length);
+		console.log("size = " + size);
+		if (size % 2 != 0) {
 			offset = 0.5;
-		this.positioning[0] = [offset, offset];
+			this.positioning[0] = [0,0];
+		}
+
+			
+		
+		console.log(this.positioning[0] + " " + offset);
 		for (let row = 0; row < arr.length; row++) {
 		  	for (let col = 0; col < arr[row].length; col++) {
 			  	if (arr[row][col] != 0) {
 				  	cells.push(
-				  		[col - arr[row].length / 2 + offset, row - arr.length / 2 + offset]
+				  		[col - size / 2 + offset, row - size / 2 + offset]
 				  	)
 			  	}
 		  	}
@@ -110,7 +128,7 @@ class Block {
 		this.type = materialType; //Only really used for appearance this deep, an RGB value might be better
 		this.x = positioning[0][0];
 		this.y = positioning[0][1];
-
+		console.log(positioning[1]);
 		this.cells = [];
 		for (let i = 0; i < positioning[1].length; i++)	{
 			this.cells.push(new Cell(positioning[1][i]));
@@ -230,7 +248,6 @@ class Cell {
 	constructor(localCoords) {
 		this.x = localCoords[0];
 		this.y = localCoords[1];
-		console.log(this.x + " " + this.y);
 	}
 
 	/*
@@ -252,7 +269,7 @@ class Cell {
 	 */
 	checkTransf(dir, baseX, baseY) {
 		let tc = this.transfCoords(dir);
-		console.log(tc[0] + baseX);
+		console.log(tc[0] + " " + baseX);
 		return (window.grid[tc[0] + baseX][tc[1] + baseY] != 0);
 	}
 
@@ -283,7 +300,8 @@ const blockType = {
 	SBlock      : 6,
 	ZBlock      : 7,
 	TBlock      : 8,
-	Pentimino	: 9
+	Pentimino	: 9,
+	EBlock		: 10
 }
 
 const direction = {
