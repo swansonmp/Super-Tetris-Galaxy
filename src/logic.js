@@ -45,11 +45,9 @@ export default class Logic {
   }
   
   updateLogic() {
-    /*
     if (this.activeBlock.advance()) {
       this.bag.pull();
     }
-    */
   }
   
   init2dArray(size) {

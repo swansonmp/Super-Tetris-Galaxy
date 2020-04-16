@@ -39,7 +39,7 @@ class BlockFactory {
 	createBlock(type) {
 		//positioning: [[Base coordinates of the block], [Array of cell offsets]]
 		this.positioning = [[0,0],[]]; 
-		let gravity = 0;
+		let gravity = direction.Down;
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
@@ -63,7 +63,8 @@ class BlockFactory {
 				//maybe even randomly some day...
 			default:
 		}
-		this.positioning[0] = [5,5];
+		this.positioning[0][0] += 23;
+		this.positioning[0][1] += 5;
 		return new Block(type, this.positioning, gravity);
 	}
 
@@ -75,9 +76,10 @@ class BlockFactory {
 		let cells = [];
 
 		//If a block is of odd length, its axis is between blocks
-		let offset = (Math.max(arr.length, arr[0].length) / 2) % 1;
+		let offset = 0;
+		if ((Math.max(arr.length, arr[0].length)) % 2 == 0)
+			offset = 0.5;
 		this.positioning[0] = [offset, offset];
-
 		for (let row = 0; row < arr.length; row++) {
 		  	for (let col = 0; col < arr[row].length; col++) {
 			  	if (arr[row][col] != 0) {
@@ -111,7 +113,7 @@ class Block {
 
 		this.cells = [];
 		for (let i = 0; i < positioning[1].length; i++)	{
-			this.cells[i] = new Cell(positioning[1][i]);
+			this.cells.push(new Cell(positioning[1][i]));
 		}
 
 		this.gravity = gravity;
@@ -124,8 +126,8 @@ class Block {
 	 * If the block encounters a collision, it dumps and returns true
 	 */
 	advance() {
-		if (move(this.gravity)) {
-			dump();
+		if (this.move(this.gravity)) {
+			this.dump();
 			return true;
 		}
 		return false;
@@ -138,7 +140,7 @@ class Block {
 	 */
 	checkTransf(dir) {
 		for (let i = 0; i < this.cells.length; i++) {
-			if (this.cells[i].checkTransf(dir))
+			if (this.cells[i].checkTransf(dir, this.x, this.y))
 				return true;
 		}
 		return false;
@@ -154,11 +156,11 @@ class Block {
 	 */
 	move(dir) {
 		if (dir == direction.SpinLeft || dir == direction.SpinRight)
-			return rotate(dir);
-		if (checkTransf(dir))
+			return this.rotate(dir);
+		if (this.checkTransf(dir))
 			return true;
-		for (let i = 0; i < cells.length; i++) {
-			this.cells[i].move(direction);
+		for (let i = 0; i < this.cells.length; i++) {
+			this.cells[i].move(dir);
 		}
 		return false;
 	}
@@ -169,10 +171,10 @@ class Block {
 	 * where the block is hoisted upon an unsuccessful rotation
 	 */
 	rotate(dir) {
-		if (checkTransf(dir))
+		if (this.checkTransf(dir))
 			return true;
 		for (let i = 0; i < this.cells.length; i++) {
-			this.cells[i].move(direction.dir);
+			this.cells[i].move(dir);
 		}
 		return false;
 	}
@@ -182,9 +184,16 @@ class Block {
 	 */
 	getSet() {
 		let set = [];
+
+		this.cells.forEach(cell => {
+			set.push([cell.x + this.x, cell.y + this.y])	
+		});
+		/*
 		for (let i = 0; i < this.cells.length; i++) {
 			set[i] = [this.cells[i].x + this.x, this.cells[i].y + this.y];
+			console.log(this.cells[i].x + " " + this.y);
 		}
+		return set; */
 		return set;
 	}
 
@@ -219,6 +228,7 @@ class Cell {
 	constructor(localCoords) {
 		this.x = localCoords[0];
 		this.y = localCoords[1];
+		console.log(this.x + " " + this.y);
 	}
 
 	/*
@@ -228,10 +238,10 @@ class Cell {
 	 */
 	transfCoords(dir) {
 		if (dir >= 0 && dir <= 3)
-			return [direction.MoveAugments[dir] + this.x, 
-					direction.MoveAugments[dir] + this.y];
+			return [direction.MoveAugments[dir][0] + this.x, 
+					direction.MoveAugments[dir][1] + this.y];
 		else
-			return rotationMatrix(dir);
+			return this.rotationMatrix(dir);
 	}
 
 	/*
@@ -239,13 +249,14 @@ class Cell {
 	 * Ensures this particular cell can enter a space without collision
 	 */
 	checkTransf(dir, baseX, baseY) {
-		let tc = transfCoords(dir);
-		return (window.grid[tc[0]][tc[1]] != 0);
+		let tc = this.transfCoords(dir);
+		console.log(tc[0] + baseX);
+		return (window.grid[tc[0] + baseX][tc[1] + baseY] != 0);
 	}
 
 	//Moves the cell in a direction
 	move(dir) {
-		let tc = transfCoords(dir);
+		let tc = this.transfCoords(dir);
 		this.x = tc[0];
 		this.y = tc[1];
 	}

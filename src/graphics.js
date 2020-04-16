@@ -32,9 +32,9 @@ export default class Graphics {
       new THREE.MeshStandardMaterial( {color: 0x8000ff} )
     ];
     
-    //for (let i = 0; i < 9; i++) {
-    //  this.materials[i].wireframe = true;
-    //}
+    for (let i = 0; i < 9; i++) {
+      this.materials[i].wireframe = true;
+    }
     
     let gridSize = this.game.logic.getGridSize();
     this.grid = this.game.logic.init2dArray(gridSize);
