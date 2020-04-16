@@ -2,8 +2,7 @@ import * as THREE from './lib/three.module.js';
 import { OrbitControls } from './lib/OrbitControls.js';
 
 export default class Graphics {
-
-
+  
   constructor(game, renderer) {
     this.game = game;
     this.renderer = renderer;
@@ -72,13 +71,13 @@ export default class Graphics {
     
     let gridSize = this.game.logic.getGridSize();
     this.controls.target = new THREE.Vector3(gridSize / 2, -gridSize / 2, 0);
-    
   }
   
   updateBlocks() {
     let logicGrid = this.game.logic.getGrid();
     let gridSize = this.game.logic.getGridSize();
     
+    // Set graphics grid materials to match logic grid
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
         let type = logicGrid[i][j];
@@ -92,7 +91,7 @@ export default class Graphics {
     for (let i = 0; i < set.length; i++) {
       let x = set[i][0];
       let y = set[i][1];
-      // Ensure bounds
+      // Ensure drawing bounds
       if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
         this.grid[x][y].material = this.materials[activeBlock.getType()];
       }
