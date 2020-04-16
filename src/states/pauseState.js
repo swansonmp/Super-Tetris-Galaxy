@@ -8,14 +8,13 @@ export default class PauseState extends State {
        [
         { id: "pauseFilter" },
         { id: "pauseText", text: "Paused"},
-		{ id: "optionButton", tag: "Button", text: "OPTIONS" }
+        { id: "optionButton", tag: "button", text: "Options" },
+        { id: "exitButton", tag: "button", text: "Exit" }
        ]
 	  );
-	  
-	  
-	  
-	
-	
+    
+    document.getElementById("optionButton").onclick = function() { }
+    document.getElementById("exitButton").onclick = function() { game.setState(game.getMenuState()); }
 	}
 	
 	update(deltaTime) {
