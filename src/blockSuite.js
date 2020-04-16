@@ -207,7 +207,9 @@ class Block {
 	 * The block is no longer considered active.
 	 */
 	dump() {
-		//Need to access grid.
+		this.cells.forEach(cell => {
+			window.grid[cell.x + this.x][cell.y + this.y] = this.type;
+		});
 		this.active = false;
 	}
 

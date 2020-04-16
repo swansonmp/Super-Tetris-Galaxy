@@ -46,7 +46,7 @@ export default class Logic {
   
   updateLogic() {
     if (this.activeBlock.advance()) {
-      this.bag.pull();
+      this.activeBlock = this.bag.pull();
     }
   }
   
