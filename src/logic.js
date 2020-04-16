@@ -75,22 +75,26 @@ export default class Logic {
   
   initGame() {
     this.bag = bagFactory(0);
-    //this.activeBlock = this.bag.pull();
+    this.activeBlock = this.bag.pull();
   }
   
   update(deltaTime) {
     this.elapsedTime += deltaTime;
     if (this.elapsedTime >= this.delay) {
-      //this.updateLogic();
+      console.log("tick");
+      this.updateLogic();
       this.game.graphics.updateBlocks();
       this.elapsedTime -= this.delay;
     }
   }
   
   updateLogic() {
+    
+    /*
     if (this.activeBlock.advance()) {
       this.bag.pull();
     }
+    */
   }
   
   init2dArray(size) {
@@ -107,6 +111,10 @@ export default class Logic {
   
   getGridSize() {
     return window.grid[0].length;
+  }
+  
+  getActiveBlock() {
+    return this.activeBlock;
   }
   
 }
