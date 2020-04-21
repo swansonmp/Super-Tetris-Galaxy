@@ -32,9 +32,9 @@ export default class Graphics {
       new THREE.MeshStandardMaterial( {color: 0x8000ff} )
     ];
     
-    for (let i = 0; i < 9; i++) {
-      this.materials[i].wireframe = true;
-    }
+    //for (let i = 0; i < 9; i++) {
+    //  this.materials[i].wireframe = true;
+    //}
     
     let gridSize = this.game.logic.getGridSize();
     this.grid = this.game.logic.init2dArray(gridSize);
@@ -60,9 +60,12 @@ export default class Graphics {
       100
     );
     
-    this.camera.position.x = gridSize / 2;
-    this.camera.position.y = -gridSize / 2;
-    this.camera.position.z = 35;
+    this.center = new THREE.Vector3(gridSize / 2 - 0.5, -gridSize / 2 + 0.5, 0);
+    this.cameraDistance = 35;
+    
+    this.camera.position.x = this.center.x;
+    this.camera.position.y = this.center.y;
+    this.camera.position.z = this.cameraDistance;
     //this.camera.lookAt(gridSize / 2, gridSize / 2, gridSize);
   }
   
@@ -70,7 +73,7 @@ export default class Graphics {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     
     let gridSize = this.game.logic.getGridSize();
-    this.controls.target = new THREE.Vector3(gridSize / 2, -gridSize / 2, 0);
+    this.controls.target = this.center.clone();
   }
   
   updateBlocks() {
