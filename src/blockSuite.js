@@ -38,8 +38,8 @@ class BlockFactory {
 
 	createBlock(type) {
 		//positioning: [[Base coordinates of the block], [Array of cell offsets]]
-		this.positioning = [[0,0],[]]; 
-		let gravity = direction.Down;
+		this.positioning = [[],[]]; 
+		let gravity = direction.SpinRight;
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
@@ -76,6 +76,7 @@ class BlockFactory {
 		this.positioning[0][0] += 23;
 		this.positioning[0][1] += 8;
 		console.log("giving block " + this.positioning[0]);
+		console.log(this.positioning[1]);
 		return new Block(4, this.positioning, gravity);
 	}
 
@@ -86,28 +87,29 @@ class BlockFactory {
 	generateOffsets(arr) {
 		let cells = [];
 
-		//If a block is of odd length, its axis is between blocks
-		let offset = 0;
-		let size = Math.max(arr.length, arr[0].length);
-		console.log("size = " + size);
-		if (size % 2 != 0) {
-			offset = 0.5;
-			this.positioning[0] = [0,0];
-		}
-
-			
 		
-		console.log(this.positioning[0] + " " + offset);
+		let offset = 0.5;
+		let size = Math.max(arr.length, arr[0].length);
+
+		//If a block is of even size, the origin exists between blocks
+		if (size % 2 == 0) {
+			this.positioning[0] = [0.5, 0.5];
+		}
+		else {
+			this.positioning[0] = [0, 0];
+		}
+		
 		for (let row = 0; row < arr.length; row++) {
 		  	for (let col = 0; col < arr[row].length; col++) {
 			  	if (arr[row][col] != 0) {
 				  	cells.push(
-				  		[col - size / 2 + offset, row - size / 2 + offset]
+				  		[col - size / 2 + offset, size / 2 - row - offset]
 				  	)
 			  	}
 		  	}
 	  	}
 	  	this.positioning[1] = cells;
+
 	  	//still more to do here
 	}
 
@@ -128,7 +130,6 @@ class Block {
 		this.type = materialType; //Only really used for appearance this deep, an RGB value might be better
 		this.x = positioning[0][0];
 		this.y = positioning[0][1];
-		console.log(positioning[1]);
 		this.cells = [];
 		for (let i = 0; i < positioning[1].length; i++)	{
 			this.cells.push(new Cell(positioning[1][i]));
@@ -256,7 +257,7 @@ class Cell {
 	 * coordinates after a given transformation
 	 */
 	transfCoords(dir) {
-		if (dir >= 0 && dir <= 3)
+		if (dir != direction.SpinRight && dir != direction.SpinLeft)
 			return [direction.MoveAugments[dir][0] + this.x, 
 					direction.MoveAugments[dir][1] + this.y];
 		else
@@ -269,7 +270,7 @@ class Cell {
 	 */
 	checkTransf(dir, baseX, baseY) {
 		let tc = this.transfCoords(dir);
-		console.log(tc[0] + " " + baseX);
+		//console.log(this.x + " " + this.y + " " + tc[0] + " " + tc[1]);
 		return (window.grid[tc[0] + baseX][tc[1] + baseY] != 0);
 	}
 
@@ -284,8 +285,8 @@ class Cell {
 	 * Returns a 2 length array of the coordinates after the rotation specified.
 	 */
 	rotationMatrix(dir) {
-		return [this.x * Math.cos(dir) + this.y * Math.sin(dir),
-				this.x * -Math.sin(dir) + this.y * Math.cos(dir)];
+		return [Math.round((this.x * Math.cos(dir) - this.y * Math.sin(dir)) * 10) / 10,
+				Math.round((this.x * Math.sin(dir) + this.y * Math.cos(dir)) * 10) / 10 ];
 	}
 }
 
@@ -304,13 +305,15 @@ const blockType = {
 	EBlock		: 10
 }
 
+const pi = Math.PI;
+
 const direction = {
 	Up : 0,
 	Down: 1,
 	Left: 2,
 	Right: 3,
-	SpinLeft : -90,
-	SpinRight: 90,
+	SpinLeft : -pi / 2,
+	SpinRight: pi / 2,
 	MoveAugments : [[0, 1], [0, 1], [-1, 0], [0, 1]]
 }
 
