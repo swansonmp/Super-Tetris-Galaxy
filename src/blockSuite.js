@@ -3,25 +3,39 @@
  * depending on bagType specified
  */
 export default function bagFactory(type) {
+	let blocks;
 	switch (type) {
 		case bagType.Classic:
+			blocks = [2,3,4,5,6,7,8];
 			break;
 		case bagType.Pentimino:
 			break;
 		case bagType.Unfair:
 			break;
 		default:
+			blocks = [2];
 	}
-	return new Bag();
+	return new Bag(blocks);
 }
 
 class Bag {
-	constructor() {
+	constructor(blocks, pullStrat) {
+		this.refBlocks = blocks;
 		this.blockFactory = new BlockFactory(0, 0, 0);
+
+		//assigns the bag to use random spawning (temp)
+		this.pullMethod = this.rando;
 	}
-	//I'm just a shell of a bag
+
+	//Pulls a piece using that particular bag's pull method
 	pull() {
-		return this.blockFactory.createBlock(blockType.JBlock);
+		return this.pullMethod();
+	}
+
+	//No 'bag', just pulls random pieces
+	rando() {
+		return this.blockFactory.createBlock(
+			this.refBlocks[Math.floor(Math.random() * (this.refBlocks.length - 1))]);
 	}
 }
 
@@ -39,7 +53,7 @@ class BlockFactory {
 	createBlock(type) {
 		//positioning: [[Base coordinates of the block], [Array of cell offsets]]
 		this.positioning = [[],[]]; 
-		let gravity = direction.SpinRight;
+		let gravity = direction.Down;
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
@@ -59,6 +73,30 @@ class BlockFactory {
 					[1,1,1]
 				]); 
 				break;
+			case blockType.LBlock:
+				this.generateOffsets([
+					[0,0,1],
+					[1,1,1]
+				]);
+				break;
+			case blockType.SBlock:
+				this.generateOffsets([
+					[0,1,1],
+					[1,1,0]
+				]);
+				break;
+			case blockType.ZBlock:
+				this.generateOffsets([
+					[1,1,0],
+					[0,1,1]
+				]);
+				break;
+			case blockType.TBlock:
+				this.generateOffsets([
+					[0,1,0],
+					[1,1,1]
+				]);
+				break;
 			case blockType.Pentimino:
 				//maybe even randomly some day...
 				break;
@@ -77,7 +115,7 @@ class BlockFactory {
 		this.positioning[0][1] += 8;
 		console.log("giving block " + this.positioning[0]);
 		console.log(this.positioning[1]);
-		return new Block(4, this.positioning, gravity);
+		return new Block(type, this.positioning, gravity);
 	}
 
 	/*
@@ -109,8 +147,6 @@ class BlockFactory {
 		  	}
 	  	}
 	  	this.positioning[1] = cells;
-
-	  	//still more to do here
 	}
 
 	/*
