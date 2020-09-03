@@ -84,8 +84,8 @@ var OrbitControls = function ( object, domElement ) {
 	// Set to false to disable use of the keys
 	this.enableKeys = true;
 
-	// The four arrow keys
-	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
+	// Key controls: WASD to pan camera
+  this.keys = { LEFT: 65, UP: 87, RIGHT: 68, BOTTOM: 83 };
 
 	// Mouse buttons
 	this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
