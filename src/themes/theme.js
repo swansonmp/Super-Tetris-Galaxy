@@ -4,4 +4,6 @@ export default class Theme {
   constructor() {
     this.scene = new THREE.Scene();
   }
+  
+  update(deltaTime) { }
 }

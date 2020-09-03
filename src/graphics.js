@@ -7,6 +7,8 @@ export default class Graphics {
     this.game = game;
     this.renderer = renderer;
     
+    this.dynamicThemes = true;
+    
     this.initScene();
     this.initBlocks();
     this.initCamera();
@@ -19,6 +21,7 @@ export default class Graphics {
   }
   
   addTheme(theme) {
+    this.theme = theme;
     let graphicsScene = this.scene;
     let themeScene = theme.scene;
     
@@ -113,6 +116,10 @@ export default class Graphics {
         this.grid[x][y].material = this.materials[activeBlock.getType()];
       }
     }
+  }
+  
+  update(deltaTime) {
+    if (this.dynamicThemes && this.theme != undefined) this.theme.update(deltaTime);
   }
   
   render() {
