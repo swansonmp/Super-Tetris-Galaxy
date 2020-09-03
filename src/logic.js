@@ -58,11 +58,16 @@ export default class Logic {
   }
 
   findRings(block) {
-  	return ["ayy"];
+    let rings = [];
+    block.getSet().forEach(coords => {
+      rings.push(Math.max(Math.abs(this.origin(coords[0])), Math.abs(this.origin(coords[1]))));
+    });
+
+  	return rings;
   }
 
   testRing(ring) {
-  	console.log("ringring");
+  	console.log(ring);
   }
   
   moveLeft() { this.activeBlock.move(direction.Left); }
@@ -87,6 +92,11 @@ export default class Logic {
   
   getGridSize() {
     return window.grid[0].length;
+  }
+
+  //Adjusts origin to middle of grid
+  origin(coord) {
+    return Math.round(coord - this.gridSize / 2);
   }
   
   getActiveBlock() {

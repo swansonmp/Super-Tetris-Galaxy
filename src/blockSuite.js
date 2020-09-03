@@ -314,7 +314,6 @@ class Cell {
 	//Moves the cell in a direction
 	move(dir) {
 		let tc = this.transfCoords(dir);
-		console.log(tc);
 		this.x = tc[0];
 		this.y = tc[1];
 	}
