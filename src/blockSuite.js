@@ -350,7 +350,7 @@ export const direction = {
 	Right: 3,
 	SpinLeft : -pi / 2,
 	SpinRight: pi / 2,
-	MoveAugments : [[0, 1], [0, 1], [-1, 0], [0, 1]]
+	MoveAugments : [[0, -1], [0, 1], [-1, 0], [1, 0]]
 }
 
 //Mostly just examples of application at this point
