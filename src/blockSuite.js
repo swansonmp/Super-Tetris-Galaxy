@@ -53,7 +53,7 @@ class BlockFactory {
 	createBlock(type) {
 		//positioning: [[Base coordinates of the block], [Array of cell offsets]]
 		this.positioning = [[],[]]; 
-		let gravity = direction.Right;
+		let gravity = direction.Down;
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
@@ -212,12 +212,13 @@ class Block {
 	move(dir) {
 		if (dir == direction.SpinLeft || dir == direction.SpinRight)
 			return this.rotate(dir);
-		if (this.checkTransf(dir))
-			return true;
-		for (let i = 0; i < this.cells.length; i++) {
-			this.cells[i].move(dir);
+		else if (!this.checkTransf(dir))
+		{
+			this.x += direction.MoveAugments[dir][0];
+			this.y += direction.MoveAugments[dir][1];
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/*
