@@ -35,6 +35,12 @@ export default class InputHandler {
         case 87:
           game.state.handleWKey();
           break;
+        case 88:
+          game.state.handleXKey();
+          break;
+        case 90:
+          game.state.handleZKey();
+          break;
         case 187:
           game.state.handleEqualKey();
           break;

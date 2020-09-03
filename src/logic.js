@@ -1,4 +1,5 @@
 import bagFactory from "./blockSuite.js";
+import { direction } from "./blockSuite.js";
 
 export default class Logic {
 
@@ -49,6 +50,14 @@ export default class Logic {
       this.activeBlock = this.bag.pull();
     }
   }
+  
+  moveLeft() { this.activeBlock.move(direction.Left); }
+  moveUp() { this.activeBlock.move(direction.Up); }
+  moveRight() { this.activeBlock.move(direction.Right); }
+  moveDown() { this.activeBlock.move(direction.Down); }
+  
+  spinLeft() { this.activeBlock.move(direction.SpinLeft); }
+  spinRight() { this.activeBlock.move(direction.SpinRight); }
   
   init2dArray(size) {
     let a = [];

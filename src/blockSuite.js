@@ -343,7 +343,7 @@ const blockType = {
 
 const pi = Math.PI;
 
-const direction = {
+export const direction = {
 	Up : 0,
 	Down: 1,
 	Left: 2,
