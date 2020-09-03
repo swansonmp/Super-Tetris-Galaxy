@@ -39,13 +39,13 @@ export default class Logic {
     this.elapsedTime += deltaTime;
     if (this.elapsedTime >= this.delay) {
       console.log("tick");
-      this.updateLogic();
+      this.advanceBlock();
       this.game.graphics.updateBlocks();
       this.elapsedTime -= this.delay;
     }
   }
   
-  updateLogic() {
+  advanceBlock() {
     if (this.activeBlock.advance()) {
     	this.breakCheck(this.activeBlock);
       this.activeBlock = this.bag.pull();
@@ -65,13 +65,17 @@ export default class Logic {
   	console.log("ringring");
   }
   
-  moveLeft() { this.activeBlock.move(direction.Left); }
-  moveUp() { this.activeBlock.move(direction.Up); }
-  moveRight() { this.activeBlock.move(direction.Right); }
-  moveDown() { this.activeBlock.move(direction.Down); }
+  moveLeft() { this.move(direction.Left); }
+  moveUp() { this.move(direction.Up); }
+  moveRight() { this.move(direction.Right); }
+  moveDown() { this.move(direction.Down); }
+  spinLeft() { this.move(direction.SpinLeft); }
+  spinRight() { this.move(direction.SpinRight); }
   
-  spinLeft() { this.activeBlock.move(direction.SpinLeft); }
-  spinRight() { this.activeBlock.move(direction.SpinRight); }
+  move(dir) {
+    this.activeBlock.move(dir);
+    this.game.graphics.updateBlocks();
+  }
   
   init2dArray(size) {
     let a = [];

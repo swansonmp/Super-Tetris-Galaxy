@@ -21,11 +21,10 @@ export default class PlayState extends State {
   }
   
   start() {
-    // Remove current theme
-    
-    // Get new theme
-    
-    // Add new theme
+    /*
+     * This is where the theme is instantiated.
+     * TODO : get the theme from an options menu
+     */
     let theme = new GreenFieldTheme();
     this.game.graphics.addTheme(theme);
     
