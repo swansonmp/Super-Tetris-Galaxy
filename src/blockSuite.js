@@ -53,7 +53,7 @@ class BlockFactory {
 	createBlock(type) {
 		//positioning: [[Base coordinates of the block], [Array of cell offsets]]
 		this.positioning = [[],[]]; 
-		let gravity = direction.Down;
+		let gravity = direction.Right;
 		switch (type) {
 			case blockType.OBlock:
 				//Block shape can be generated through offsets
@@ -313,6 +313,7 @@ class Cell {
 	//Moves the cell in a direction
 	move(dir) {
 		let tc = this.transfCoords(dir);
+		console.log(tc);
 		this.x = tc[0];
 		this.y = tc[1];
 	}
@@ -350,7 +351,7 @@ const direction = {
 	Right: 3,
 	SpinLeft : -pi / 2,
 	SpinRight: pi / 2,
-	MoveAugments : [[0, 1], [0, 1], [-1, 0], [0, 1]]
+	MoveAugments : [[0, -1], [0, 1], [-1, 0], [1, 0]]
 }
 
 //Mostly just examples of application at this point

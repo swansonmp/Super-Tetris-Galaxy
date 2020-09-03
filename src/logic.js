@@ -46,14 +46,28 @@ export default class Logic {
   
   updateLogic() {
     if (this.activeBlock.advance()) {
+    	this.breakCheck(this.activeBlock);
       this.activeBlock = this.bag.pull();
     }
+  }
+
+  breakCheck(block) {
+  	let rings = this.findRings(block)
+  	rings.forEach(this.testRing);
+  }
+
+  findRings(block) {
+  	return ["ayy"];
+  }
+
+  testRing(ring) {
+  	console.log("ringring");
   }
   
   init2dArray(size) {
     let a = [];
     for (let i = 0; i < size; i++) {
-        a.push([]);
+     	a.push([]);
     }
     return a;
   }
