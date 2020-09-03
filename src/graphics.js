@@ -18,6 +18,20 @@ export default class Graphics {
     this.scene.add(new THREE.HemisphereLight( 0xffffff, 0x808080, 1 ));
   }
   
+  addTheme(theme) {
+    let graphicsScene = this.scene;
+    let themeScene = theme.scene;
+    
+    // Apply background and fog
+    graphicsScene.background = themeScene.background;
+    graphicsScene.fog = themeScene.fog;
+    
+    // Add theme objects
+    themeScene.traverse(function(element) {
+      graphicsScene.add(element);
+    });
+  }
+  
   initBlocks() {
     this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
     this.materials = [
@@ -57,7 +71,7 @@ export default class Graphics {
       75, //field of view
       window.innerWidth / window.innerHeight, //aspect ratio
       0.1, //clipping distances
-      100
+      1000
     );
     
     this.center = new THREE.Vector3(gridSize / 2 - 0.5, -gridSize / 2 + 0.5, 0);

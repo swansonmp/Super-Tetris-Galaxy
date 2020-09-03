@@ -1,5 +1,7 @@
 import State from "./state.js";
 
+import GreenFieldTheme from './../themes/GreenFieldTheme/greenFieldTheme.js';
+
 export default class PlayState extends State {
   constructor(game) {
     super(game,
@@ -18,7 +20,17 @@ export default class PlayState extends State {
     this.game.graphics.render();
   }
   
-  start() { this.showElements(); }
+  start() {
+    // Remove current theme
+    
+    // Get new theme
+    
+    // Add new theme
+    let theme = new GreenFieldTheme();
+    this.game.graphics.addTheme(theme);
+    
+    this.showElements();
+  }
   stop() { this.hideElements(); }
   
   handleEscape() { this.game.setState(this.game.getPauseState()); }
