@@ -43,7 +43,9 @@ export default class State {
   handleAKey() { }
   handleSKey() { }
   handleDKey() { }
-  handleMinus() { }
+  handleXKey() { }
+  handleZKey() { }
   handleEqual() { }
+  handleMinus() { }
   
 }
