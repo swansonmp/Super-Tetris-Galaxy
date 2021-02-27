@@ -1,129 +1,129 @@
 body {
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden;
-  touch-action: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    touch-action: none;
 }
 canvas { 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 img {
-  display: none;
+    display: none;
 }
 #loading {
-  color: black;
-  font: 24px FreeMono, monospace;
+    color: black;
+    font: 24px FreeMono, monospace;
 }
 #background {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
-  z-index: 0;
-  display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    z-index: 0;
+    display: none;
 }
 #pauseFilter {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  z-index: 0;
-  backdrop-filter: blur(10px);
-  display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    backdrop-filter: blur(10px);
+    display: none;
 }
 #pauseText {
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  z-index: 1;
-  display: none;
-  
-  text-align: center;
-  font: bold 72px monospace;
-  color: white;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    z-index: 1;
+    display: none;
+    
+    text-align: center;
+    font: bold 72px monospace;
+    color: white;
 }
 #menuText {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  z-index: 1;
-  display: none;
-  text-align: center;
-  font: bold 72px monospace;
-  color: white;
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    z-index: 1;
+    display: none;
+    text-align: center;
+    font: bold 72px monospace;
+    color: white;
 }
 #menuButton {
-  position: absolute;
-  top: 60%;
-  left: 35%;
-  width: 25%;
-  z-index: 1;
-  display: none;
-  
-  text-align: center;
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  color: white;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
-  padding: 12px 12px;
-  text-decoration: none;
-  font: bold 24px monospace;
-  
-  animation-name: menuButtonAnimation;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+    position: absolute;
+    top: 60%;
+    left: 35%;
+    width: 25%;
+    z-index: 1;
+    display: none;
+    
+    text-align: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    color: white;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    padding: 12px 12px;
+    text-decoration: none;
+    font: bold 24px monospace;
+    
+    animation-name: menuButtonAnimation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 @keyframes menuButtonAnimation {
-  0%   { color: white; }
-  50%  { color: #111111; }
-  100% { color: white; }
+    0%   { color: white; }
+    50%  { color: #111111; }
+    100% { color: white; }
 }
 #optionButton {
-  position: absolute;
-  top: 30%;
-  left: 37.5%;
-  width: 25%;
-  height: 10%
-  z-index: 1;
-  display: none;
-  
-  text-align: center;
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  color: white;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
-  padding: 12px 12px;
-  text-decoration: none;
-  font: bold 24px monospace;
+    position: absolute;
+    top: 30%;
+    left: 37.5%;
+    width: 25%;
+    height: 10%;
+    z-index: 1;
+    display: none;
+    
+    text-align: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    color: white;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    padding: 12px 12px;
+    text-decoration: none;
+    font: bold 24px monospace;
 }
 #exitButton {
-  position: absolute;
-  top: 40%;
-  left: 37.5%;
-  width: 25%;
-  height: 10%
-  z-index: 1;
-  display: none;
-  
-  text-align: center;
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  color: white;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
-  padding: 12px 12px;
-  text-decoration: none;
-  font: bold 24px monospace;
+    position: absolute;
+    top: 40%;
+    left: 37.5%;
+    width: 25%;
+    height: 10%;
+    z-index: 1;
+    display: none;
+    
+    text-align: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    color: white;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    padding: 12px 12px;
+    text-decoration: none;
+    font: bold 24px monospace;
 }
